@@ -516,10 +516,20 @@ L.Path.include({
 });
 
 L.Map.include({
+	shownLabel: null,
+
 	showLabel: function (label) {
+
+		//Remember the last shown label to hide it on touch devices
+		if (this.shownLabel) {
+			this.shownLabel.close();
+		}
+		this.shownLabel = label;
+
 		return this.addLayer(label);
 	}
 });
+
 
 L.FeatureGroup.include({
 	// TODO: remove this when AOP is supported in Leaflet, need this as we cannot put code in removeLayer()
